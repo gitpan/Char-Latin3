@@ -13,10 +13,10 @@ BEGIN {
     if ($^X =~ / jperl /oxmsi) {
         die __FILE__, ": needs perl(not jperl) 5.00503 or later. (\$^X==$^X)";
     }
-    if (ord('A') == 193) {
+    if (CORE::ord('A') == 193) {
         die __FILE__, ": is not US-ASCII script (may be EBCDIC or EBCDIK script).";
     }
-    if (ord('A') != 0x41) {
+    if (CORE::ord('A') != 0x41) {
         die __FILE__, ": is not US-ASCII script (must be US-ASCII script).";
     }
 }
@@ -27,7 +27,7 @@ BEGIN {
 # (and so on)
 
 BEGIN { eval q{ use vars qw($VERSION) } }
-$VERSION = sprintf '%d.%02d', q$Revision: 0.82 $ =~ /(\d+)/xmsg;
+$VERSION = sprintf '%d.%02d', q$Revision: 0.83 $ =~ /(\d+)/xmsg;
 
 BEGIN {
     my $PERL5LIB = __FILE__;
@@ -354,71 +354,71 @@ sub Char::Latin3::rindex($$;$);
 # Character class
 #
 BEGIN { eval q{ use vars qw(
-    @anchor
-    @dot
-    @dot_s
-    @eD
-    @eS
-    @eW
-    @eH
-    @eV
-    @eR
-    @eN
-    @not_alnum
-    @not_alpha
-    @not_ascii
-    @not_blank
-    @not_cntrl
-    @not_digit
-    @not_graph
-    @not_lower
-    @not_lower_i
-    @not_print
-    @not_punct
-    @not_space
-    @not_upper
-    @not_upper_i
-    @not_word
-    @not_xdigit
-    @eb
-    @eB
+    $anchor
+    $dot
+    $dot_s
+    $eD
+    $eS
+    $eW
+    $eH
+    $eV
+    $eR
+    $eN
+    $not_alnum
+    $not_alpha
+    $not_ascii
+    $not_blank
+    $not_cntrl
+    $not_digit
+    $not_graph
+    $not_lower
+    $not_lower_i
+    $not_print
+    $not_punct
+    $not_space
+    $not_upper
+    $not_upper_i
+    $not_word
+    $not_xdigit
+    $eb
+    $eB
 ) } }
-@{Char::Elatin3::anchor}      = qr{\G(?:[\x00-\xFF])*?};
-@{Char::Elatin3::dot}         = qr{(?:[^\x0A])};
-@{Char::Elatin3::dot_s}       = qr{(?:[\x00-\xFF])};
-@{Char::Elatin3::eD}          = qr{(?:[^0-9])};
+${Char::Elatin3::anchor}      = qr{\G(?:[\x00-\xFF])*?};
+${Char::Elatin3::dot}         = qr{(?:[^\x0A])};
+${Char::Elatin3::dot_s}       = qr{(?:[\x00-\xFF])};
+${Char::Elatin3::eD}          = qr{(?:[^0-9])};
 
-@{Char::Elatin3::eS}          = qr{(?:[^\x09\x0A\x0C\x0D\x20])};
+${Char::Elatin3::eS}          = qr{(?:[^\x09\x0A\x0C\x0D\x20])};
 
 # Incompatible Changes
 # \s in regular expressions now matches a Vertical Tab (experimental)
 # http://search.cpan.org/~zefram/perl-5.17.0/pod/perldelta.pod
 
-# @{Char::Elatin3::eS}        = qr{(?:[^\x09\x0A\x0B\x0C\x0D\x20])};
+# ${Char::Elatin3::eS}        = qr{(?:[^\x09\x0A\x0B\x0C\x0D\x20])};
 
-@{Char::Elatin3::eW}          = qr{(?:[^0-9A-Z_a-z])};
-@{Char::Elatin3::eH}          = qr{(?:[^\x09\x20])};
-@{Char::Elatin3::eV}          = qr{(?:[^\x0A\x0B\x0C\x0D])};
-@{Char::Elatin3::eR}          = qr{(?:\x0D\x0A|[\x0A\x0D])};
-@{Char::Elatin3::eN}          = qr{(?:[^\x0A])};
-@{Char::Elatin3::not_alnum}   = qr{(?:[^\x30-\x39\x41-\x5A\x61-\x7A])};
-@{Char::Elatin3::not_alpha}   = qr{(?:[^\x41-\x5A\x61-\x7A])};
-@{Char::Elatin3::not_ascii}   = qr{(?:[^\x00-\x7F])};
-@{Char::Elatin3::not_blank}   = qr{(?:[^\x09\x20])};
-@{Char::Elatin3::not_cntrl}   = qr{(?:[^\x00-\x1F\x7F])};
-@{Char::Elatin3::not_digit}   = qr{(?:[^\x30-\x39])};
-@{Char::Elatin3::not_graph}   = qr{(?:[^\x21-\x7F])};
-@{Char::Elatin3::not_lower}   = qr{(?:[^\x61-\x7A])};
-@{Char::Elatin3::not_lower_i} = qr{(?:[\x00-\xFF])};
-@{Char::Elatin3::not_print}   = qr{(?:[^\x20-\x7F])};
-@{Char::Elatin3::not_punct}   = qr{(?:[^\x21-\x2F\x3A-\x3F\x40\x5B-\x5F\x60\x7B-\x7E])};
-@{Char::Elatin3::not_space}   = qr{(?:[^\x09\x0A\x0B\x0C\x0D\x20])};
-@{Char::Elatin3::not_upper}   = qr{(?:[^\x41-\x5A])};
-@{Char::Elatin3::not_upper_i} = qr{(?:[\x00-\xFF])};
-@{Char::Elatin3::not_word}    = qr{(?:[^\x30-\x39\x41-\x5A\x5F\x61-\x7A])};
-@{Char::Elatin3::not_xdigit}  = qr{(?:[^\x30-\x39\x41-\x46\x61-\x66])};
-@{Char::Elatin3::eb}          = qr{(?:\A(?=[0-9A-Z_a-z])|(?<=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF])(?=[0-9A-Z_a-z])|(?<=[0-9A-Z_a-z])(?=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF]|\z))};
-@{Char::Elatin3::eB}          = qr{(?:(?<=[0-9A-Z_a-z])(?=[0-9A-Z_a-z])|(?<=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF])(?=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF]))};
+${Char::Elatin3::eW}          = qr{(?:[^0-9A-Z_a-z])};
+${Char::Elatin3::eH}          = qr{(?:[^\x09\x20])};
+${Char::Elatin3::eV}          = qr{(?:[^\x0A\x0B\x0C\x0D])};
+${Char::Elatin3::eR}          = qr{(?:\x0D\x0A|[\x0A\x0D])};
+${Char::Elatin3::eN}          = qr{(?:[^\x0A])};
+${Char::Elatin3::not_alnum}   = qr{(?:[^\x30-\x39\x41-\x5A\x61-\x7A])};
+${Char::Elatin3::not_alpha}   = qr{(?:[^\x41-\x5A\x61-\x7A])};
+${Char::Elatin3::not_ascii}   = qr{(?:[^\x00-\x7F])};
+${Char::Elatin3::not_blank}   = qr{(?:[^\x09\x20])};
+${Char::Elatin3::not_cntrl}   = qr{(?:[^\x00-\x1F\x7F])};
+${Char::Elatin3::not_digit}   = qr{(?:[^\x30-\x39])};
+${Char::Elatin3::not_graph}   = qr{(?:[^\x21-\x7F])};
+${Char::Elatin3::not_lower}   = qr{(?:[^\x61-\x7A])};
+${Char::Elatin3::not_lower_i} = qr{(?:[\x00-\xFF])};
+${Char::Elatin3::not_print}   = qr{(?:[^\x20-\x7F])};
+${Char::Elatin3::not_punct}   = qr{(?:[^\x21-\x2F\x3A-\x3F\x40\x5B-\x5F\x60\x7B-\x7E])};
+${Char::Elatin3::not_space}   = qr{(?:[^\x09\x0A\x0B\x0C\x0D\x20])};
+${Char::Elatin3::not_upper}   = qr{(?:[^\x41-\x5A])};
+${Char::Elatin3::not_upper_i} = qr{(?:[\x00-\xFF])};
+${Char::Elatin3::not_word}    = qr{(?:[^\x30-\x39\x41-\x5A\x5F\x61-\x7A])};
+${Char::Elatin3::not_xdigit}  = qr{(?:[^\x30-\x39\x41-\x46\x61-\x66])};
+${Char::Elatin3::eb}          = qr{(?:\A(?=[0-9A-Z_a-z])|(?<=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF])(?=[0-9A-Z_a-z])|(?<=[0-9A-Z_a-z])(?=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF]|\z))};
+${Char::Elatin3::eB}          = qr{(?:(?<=[0-9A-Z_a-z])(?=[0-9A-Z_a-z])|(?<=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF])(?=[\x00-\x2F\x40\x5B-\x5E\x60\x7B-\xFF]))};
 
 #
 # @ARGV wildcard globbing
@@ -922,7 +922,7 @@ sub Char::Elatin3::fc(@) {
 }
 
 #
-# Latin-3 fold case lower case without parameter
+# Latin-3 fold case without parameter
 #
 sub Char::Elatin3::fc_() {
     my $s = $_;
@@ -979,11 +979,9 @@ sub Char::Elatin3::ignorecase(@) {
 
                         # escape character
                         for my $char (@charlist) {
-
-                            # do not use quotemeta here
-                            if ($char =~ /\A ([\x80-\xFF].*) ($metachar) \z/oxms) {
-                                $char = $1 . '\\' . $2;
+                            if (0) {
                             }
+
                             elsif ($char =~ /\A [.|)] \z/oxms) {
                                 $char = $1 . '\\' . $char;
                             }
@@ -1018,11 +1016,9 @@ sub Char::Elatin3::ignorecase(@) {
 
                         # escape character
                         for my $char (@charlist) {
-
-                            # do not use quotemeta here
-                            if ($char =~ /\A ([\x80-\xFF].*) ($metachar) \z/oxms) {
-                                $char = $1 . '\\' . $2;
+                            if (0) {
                             }
+
                             elsif ($char =~ /\A [.|)] \z/oxms) {
                                 $char = '\\' . $char;
                             }
@@ -1061,9 +1057,7 @@ sub Char::Elatin3::ignorecase(@) {
         for (my $i=0; $i <= $#char; $i++) {
             next if not defined $char[$i];
 
-            # escape last octet of multiple-octet
-            if ($char[$i] =~ /\A ([\x80-\xFF].*) ($metachar) \z/oxms) {
-                $char[$i] = $1 . '\\' . $2;
+            if (0) {
             }
 
             # quote character before ? + * {
@@ -1088,9 +1082,9 @@ sub classic_character_class($) {
     my($char) = @_;
 
     return {
-        '\D' => '@{Char::Elatin3::eD}',
-        '\S' => '@{Char::Elatin3::eS}',
-        '\W' => '@{Char::Elatin3::eW}',
+        '\D' => '${Char::Elatin3::eD}',
+        '\S' => '${Char::Elatin3::eS}',
+        '\W' => '${Char::Elatin3::eW}',
         '\d' => '[0-9]',
                  # \t  \n  \f  \r space
         '\s' => '[\x09\x0A\x0C\x0D\x20]',
@@ -1128,11 +1122,11 @@ sub classic_character_class($) {
 
         # (and so on)
 
-        '\H' => '@{Char::Elatin3::eH}',
-        '\V' => '@{Char::Elatin3::eV}',
+        '\H' => '${Char::Elatin3::eH}',
+        '\V' => '${Char::Elatin3::eV}',
         '\h' => '[\x09\x20]',
         '\v' => '[\x0A\x0B\x0C\x0D]',
-        '\R' => '@{Char::Elatin3::eR}',
+        '\R' => '${Char::Elatin3::eR}',
 
         # \N
         #
@@ -1140,7 +1134,7 @@ sub classic_character_class($) {
         # Character Classes and other Special Escapes
         # Any character but \n (experimental). Not affected by /s modifier
 
-        '\N' => '@{Char::Elatin3::eN}',
+        '\N' => '${Char::Elatin3::eN}',
 
         # \b \B
 
@@ -1153,10 +1147,10 @@ sub classic_character_class($) {
         # of ISBN 978-0-596-00492-7 Programming Perl 4th Edition.
 
         # '\b' => '(?:(?<=\A|\W)(?=\w)|(?<=\w)(?=\W|\z))',
-        '\b' => '@{Char::Elatin3::eb}',
+        '\b' => '${Char::Elatin3::eb}',
 
         # '\B' => '(?:(?<=\w)(?=\w)|(?<=\W)(?=\W))',
-        '\B' => '@{Char::Elatin3::eB}',
+        '\B' => '${Char::Elatin3::eB}',
 
     }->{$char} || '';
 }
@@ -1558,19 +1552,19 @@ sub _charlist {
             $char[$i] = hexchr($1);
         }
 
-        # \N{CHARNAME} --> N{CHARNAME}
-        elsif ($char[$i] =~ /\A \\ ( N\{ ([^0-9\}][^\}]*) \} ) \z/oxms) {
-            $char[$i] = $1;
+        # \N{CHARNAME} --> N\{CHARNAME}
+        elsif ($char[$i] =~ /\A \\ (N) ( \{ ([^0-9\}][^\}]*) \} ) \z/oxms) {
+            $char[$i] = $1 . '\\' . $2;
         }
 
-        # \p{PROPERTY} --> p{PROPERTY}
-        elsif ($char[$i] =~ /\A \\ ( p\{ ([^0-9\}][^\}]*) \} ) \z/oxms) {
-            $char[$i] = $1;
+        # \p{PROPERTY} --> p\{PROPERTY}
+        elsif ($char[$i] =~ /\A \\ (p) ( \{ ([^0-9\}][^\}]*) \} ) \z/oxms) {
+            $char[$i] = $1 . '\\' . $2;
         }
 
-        # \P{PROPERTY} --> P{PROPERTY}
-        elsif ($char[$i] =~ /\A \\ ( P\{ ([^0-9\}][^\}]*) \} ) \z/oxms) {
-            $char[$i] = $1;
+        # \P{PROPERTY} --> P\{PROPERTY}
+        elsif ($char[$i] =~ /\A \\ (P) ( \{ ([^0-9\}][^\}]*) \} ) \z/oxms) {
+            $char[$i] = $1 . '\\' . $2;
         }
 
         # \p, \P, \X --> p, P, X
@@ -1609,15 +1603,15 @@ sub _charlist {
                 # '\s' => '[\x09\x0A\x0B\x0C\x0D\x20]',
 
                 '\w' => '[0-9A-Z_a-z]',
-                '\D' => '@{Char::Elatin3::eD}',
-                '\S' => '@{Char::Elatin3::eS}',
-                '\W' => '@{Char::Elatin3::eW}',
+                '\D' => '${Char::Elatin3::eD}',
+                '\S' => '${Char::Elatin3::eS}',
+                '\W' => '${Char::Elatin3::eW}',
 
-                '\H' => '@{Char::Elatin3::eH}',
-                '\V' => '@{Char::Elatin3::eV}',
+                '\H' => '${Char::Elatin3::eH}',
+                '\V' => '${Char::Elatin3::eV}',
                 '\h' => '[\x09\x20]',
                 '\v' => '[\x0A\x0B\x0C\x0D]',
-                '\R' => '@{Char::Elatin3::eR}',
+                '\R' => '${Char::Elatin3::eR}',
 
             }->{$1};
         }
@@ -1628,8 +1622,8 @@ sub _charlist {
 
                 '[:lower:]'   => '[\x41-\x5A\x61-\x7A]',
                 '[:upper:]'   => '[\x41-\x5A\x61-\x7A]',
-                '[:^lower:]'  => '@{Char::Elatin3::not_lower_i}',
-                '[:^upper:]'  => '@{Char::Elatin3::not_upper_i}',
+                '[:^lower:]'  => '${Char::Elatin3::not_lower_i}',
+                '[:^upper:]'  => '${Char::Elatin3::not_upper_i}',
 
             }->{$1};
         }
@@ -1650,20 +1644,20 @@ sub _charlist {
                 '[:upper:]'   => '[\x41-\x5A]',
                 '[:word:]'    => '[\x30-\x39\x41-\x5A\x5F\x61-\x7A]',
                 '[:xdigit:]'  => '[\x30-\x39\x41-\x46\x61-\x66]',
-                '[:^alnum:]'  => '@{Char::Elatin3::not_alnum}',
-                '[:^alpha:]'  => '@{Char::Elatin3::not_alpha}',
-                '[:^ascii:]'  => '@{Char::Elatin3::not_ascii}',
-                '[:^blank:]'  => '@{Char::Elatin3::not_blank}',
-                '[:^cntrl:]'  => '@{Char::Elatin3::not_cntrl}',
-                '[:^digit:]'  => '@{Char::Elatin3::not_digit}',
-                '[:^graph:]'  => '@{Char::Elatin3::not_graph}',
-                '[:^lower:]'  => '@{Char::Elatin3::not_lower}',
-                '[:^print:]'  => '@{Char::Elatin3::not_print}',
-                '[:^punct:]'  => '@{Char::Elatin3::not_punct}',
-                '[:^space:]'  => '@{Char::Elatin3::not_space}',
-                '[:^upper:]'  => '@{Char::Elatin3::not_upper}',
-                '[:^word:]'   => '@{Char::Elatin3::not_word}',
-                '[:^xdigit:]' => '@{Char::Elatin3::not_xdigit}',
+                '[:^alnum:]'  => '${Char::Elatin3::not_alnum}',
+                '[:^alpha:]'  => '${Char::Elatin3::not_alpha}',
+                '[:^ascii:]'  => '${Char::Elatin3::not_ascii}',
+                '[:^blank:]'  => '${Char::Elatin3::not_blank}',
+                '[:^cntrl:]'  => '${Char::Elatin3::not_cntrl}',
+                '[:^digit:]'  => '${Char::Elatin3::not_digit}',
+                '[:^graph:]'  => '${Char::Elatin3::not_graph}',
+                '[:^lower:]'  => '${Char::Elatin3::not_lower}',
+                '[:^print:]'  => '${Char::Elatin3::not_print}',
+                '[:^punct:]'  => '${Char::Elatin3::not_punct}',
+                '[:^space:]'  => '${Char::Elatin3::not_space}',
+                '[:^upper:]'  => '${Char::Elatin3::not_upper}',
+                '[:^word:]'   => '${Char::Elatin3::not_word}',
+                '[:^xdigit:]' => '${Char::Elatin3::not_xdigit}',
 
             }->{$1};
         }
@@ -2425,6 +2419,12 @@ sub Char::Latin3::reverse(@) {
         return CORE::reverse @_;
     }
     else {
+
+        # One of us once cornered Larry in an elevator and asked him what
+        # problem he was solving with this, but he looked as far off into
+        # the distance as he could in an elevator and said, "It seemed like
+        # a good idea at the time."
+
         return join '', CORE::reverse(join('',@_) =~ /\G ($q_char) /oxmsg);
     }
 }
