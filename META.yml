@@ -1,7 +1,7 @@
 --- #YAML:1.0
 name: Latin3
 abstract: Source code filter for Latin-3 script (Imitation JPerl)
-version: 0.88
+version: 0.89
 author:
   - INABA Hitoshi <ina@cpan.org>
 license: perl
