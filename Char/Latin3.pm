@@ -29,7 +29,7 @@ BEGIN {
 # (and so on)
 
 BEGIN { eval q{ use vars qw($VERSION) } }
-$VERSION = sprintf '%d.%02d', q$Revision: 0.90 $ =~ /(\d+)/oxmsg;
+$VERSION = sprintf '%d.%02d', q$Revision: 0.91 $ =~ /(\d+)/oxmsg;
 
 BEGIN { CORE::require Char::Elatin3; }
 
@@ -489,7 +489,7 @@ sub Char::Latin3::escape_script {
         # in Chapter 5: Pattern Matching
         # of ISBN 978-0-596-00492-7 Programming Perl 4th Edition.
 
-        $e_script .= sprintf("use Char::Elatin3 %s;\n", $Char::Latin3::VERSION); # require run-time routines version
+        $e_script .= sprintf("use Char::Elatin3 %s.0;\n", $Char::Latin3::VERSION); # require run-time routines version
 
         # use Char::Latin3 version qw(ord reverse getc);
         $function_ord     = 'ord';
@@ -5411,12 +5411,6 @@ Char/Latin3.pm removes 'bytes::' at head of function name.
   bytes::substr    substr    Byte
   ---------------------------------------
 
-=head1 Escaping Built-in Standard Module (Char/Elatin3.pm provides)
-
-Char/Elatin3.pm does "BEGIN { unshift @INC, '/Perl/site/lib/Char::Latin3' }" at head.
-Store the standard module modified for Char::Latin3 software in this directory to
-override built-in standard modules.
-
 =head1 Escaping Standard Module Content (You do)
 
 You need copy built-in standard module to /Perl/site/lib/Char::Latin3 and change
@@ -6052,3 +6046,4 @@ I am thankful to all persons.
 
 =cut
 
+# Did you fun enough? ^o^)
