@@ -1,14 +1,12 @@
 NAME
 
-       Char::Latin3 - Source code filter for Latin-3 script (Imitation JPerl)
+       Latin3 - Source code filter for Latin-3 script (Imitation JPerl)
 
 SYNOPSIS
 
     In your script:
 
-      use Char::Latin3; # CPAN formal style
-         or
-      use Latin3; # casual style
+      use Latin3;
 
     At command prompt:
 
